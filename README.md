@@ -1,4 +1,4 @@
- ![](C:\Users\Administrator\AppData\Roaming\marktext\images\8e6cdbf21cee833263fb98477f8b5deb3541dc4d.png)
+ ![](images\8e6cdbf21cee833263fb98477f8b5deb3541dc4d.png)
 
 ## hugo-theme-stack 美化版
 
