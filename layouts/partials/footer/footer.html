@@ -1,0 +1,86 @@
+{{- $ThemeVersion := "3.26.0" -}}
+<footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
+            {{ .Site.Params.footer.since }} - 
+        {{ end }}
+        {{ now.Format "2006" }} {{ default .Site.Title .Site.Copyright }}
+    </section>
+    
+    <span id="timeDate" class="copyright">载入天数...</span><span id="times" class="copyright">载入时分秒...</span>
+
+<script language="javascript"> 
+    var now = new Date();
+    function createtime(){
+        // 当前时间
+        now.setTime(now.getTime()+250);
+        var grt= new Date("2022/07/01 12:00:00"); //网站诞生时间
+        days = (now - grt ) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+        minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+
+        document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    setInterval("createtime()",250); 
+</script> 
+<div class="copyright">
+{{$scratch := newScratch}}
+{{ range (where .Site.Pages "Kind" "page" )}}
+    {{$scratch.Add "total" .WordCount}}
+{{ end }}
+{{$totalWord := $scratch.Get "total" }}
+{{ $wowWord := div $totalWord 10000}}
+{{ $wowBook := "还在努力更新中..</br>加油！加油啦！"}}
+{{ if ge $wowWord 40 }}{{$wowBook = "写完一本我国著名的</br>四大名著了！"}}
+{{ else if ge $wowWord 35 }}{{$wowBook = "写完一本 东野圭吾 的</br>《白夜行》了！"}}
+{{ else if ge $wowWord 34 }}{{$wowBook = "写完一本 雨果 的</br>《巴黎圣母院》了！"}}
+{{ else if ge $wowWord 32 }}{{$wowBook = "写完一本 艾米莉·勃朗特 的</br>《呼啸山庄》了！"}}
+{{ else if ge $wowWord 31 }}{{$wowBook = "写完一本 阿来 的</br>《尘埃落定》了！"}}
+{{ else if ge $wowWord 30 }}{{$wowBook = "写完一本 茅盾 的</br>《子夜》了！"}}
+{{ else if ge $wowWord 28 }}{{$wowBook = "写完一本 张炜 的</br>《古船》了！"}}
+{{ else if ge $wowWord 25 }}{{$wowBook = "写完一本 钱钟书 的</br>《围城》了！"}}
+{{ else if ge $wowWord 23 }}{{$wowBook = "写完一本 简·奥斯汀 的</br>《傲慢与偏见》了！"}}
+{{ else if ge $wowWord 22 }}{{$wowBook = "写完一本 莫泊桑 的</br>《一生》了！"}}
+{{ else if ge $wowWord 21 }}{{$wowBook = "写完一本 东野圭吾 的</br>《解忧杂货店》了！"}}
+{{ else if ge $wowWord 20 }}{{$wowBook = "写完一本 巴金 的</br>《寒夜》了！"}}
+{{ else if ge $wowWord 19 }}{{$wowBook = "写完一本 亚米契斯 的</br>《爱的教育》了！"}}
+{{ else if ge $wowWord 18 }}{{$wowBook = "写完一本 沈从文 的</br>《边城》了！"}}
+{{ else if ge $wowWord 17 }}{{$wowBook = "写完一本 马克·吐温 的</br>《汤姆·索亚历险记》了！"}}
+{{ else if ge $wowWord 16 }}{{$wowBook = "写完一本 曹禺 的</br>《日出》了！"}}
+{{ else if ge $wowWord 15 }}{{$wowBook = "写完一本 伯内特 的</br>《秘密花园》了！"}}
+{{ else if ge $wowWord 14 }}{{$wowBook = "写完一本 史铁生 的</br>《宿命的写作》了！"}}
+{{ else if ge $wowWord 13 }}{{$wowBook = "写完一本 曹禺 的</br>《雷雨》了！"}}
+{{ else if ge $wowWord 12 }}{{$wowBook = "写完一本 余华 的</br>《活着》了！"}}
+{{ else if ge $wowWord 11 }}{{$wowBook = "写完一本 鲁迅 的</br>《彷徨》了！"}}
+{{ else if ge $wowWord 10 }}{{$wowBook = "写完一本 马克·吐温 的</br>《王子与乞丐》了！"}}
+{{ else if ge $wowWord 9 }}{{$wowBook = "写完一本 林海音 的</br>《城南旧事》了！"}}
+{{ else if ge $wowWord 7 }}{{$wowBook = "写完一本 鲁迅 的</br>《呐喊》了！"}}
+{{ else if ge $wowWord 5 }}{{$wowBook = "写完一本 埃克苏佩里 的</br>《小王子》了！"}}
+{{ end }}
+共 {{$totalWord }} 字 <br> {{$wowBook | safeHTML }}
+</div>
+
+    <section class="powerby">
+        {{ with .Site.Params.footer.customText }}
+            {{ . | safeHTML }} <br/>
+        {{ end }}
+
+        {{- $Generator := `<a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>` -}}
+        {{- $Theme := printf `<b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="%s">Stack</a></b>` $ThemeVersion -}}
+        {{- $DesignedBy := `<a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>` -}}
+
+        {{ T "footer.builtWith" (dict "Generator" $Generator) | safeHTML }} <br />
+        {{ T "footer.designedBy" (dict "Theme" $Theme "DesignedBy" $DesignedBy) | safeHTML }}
+    </section>
+    
+</footer>
