@@ -1,4 +1,4 @@
- ![](images\8e6cdbf21cee833263fb98477f8b5deb3541dc4d.png)
+![image](https://user-images.githubusercontent.com/5889006/190859441-141b5f81-8483-40d2-bd96-ebf85616a46d.png)
 
 ## hugo-theme-stack 美化版
 
